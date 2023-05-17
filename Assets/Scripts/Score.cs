@@ -5,11 +5,11 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     int currentScore;
-    [SerializeField] float scoreMultiplyer = 10;
+    [SerializeField] float scoreDivider = 10;
 
     public int GetCurrentScore()
     {
-        return Mathf.RoundToInt(currentScore / scoreMultiplyer);
+        return Mathf.RoundToInt(currentScore / scoreDivider);
     }
 
     public void IncreaseTotalScore()
