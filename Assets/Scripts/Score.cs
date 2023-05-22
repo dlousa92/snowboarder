@@ -5,17 +5,46 @@ using UnityEngine;
 public class Score : MonoBehaviour
 {
     int currentScore;
-    [SerializeField] float scoreDivider = 10;
+    [SerializeField] float scoreDivider = 10f;
+    [SerializeField] float timerMultiplier = 100f;
+    [SerializeField] float timeToCompleteLevel = 120f;
     DustTrail dustTrail;
+    FinishLine finishLine;
+    float fillFraction;
+    float timerValue;
 
-    private void Start() 
+    void Awake() 
     {
         dustTrail = FindObjectOfType<DustTrail>();
+        finishLine = FindObjectOfType<FinishLine>();
+        timerValue = timeToCompleteLevel;
+    }
+    
+    void Update()
+    {
+        if (finishLine.GetPlayerFinished())
+        {
+            return;
+        }
+
+        UpdateTimer();
+    }
+
+    void UpdateTimer()
+    {
+        timerValue -= Time.deltaTime;
+        fillFraction = timerValue / timeToCompleteLevel;
     }
 
     public int GetCurrentScore()
     {
-        return Mathf.RoundToInt(currentScore / scoreDivider);
+        if (finishLine.GetPlayerFinished()) 
+        {
+            return Mathf.RoundToInt(currentScore / scoreDivider + (fillFraction * timerMultiplier));
+        } else {
+            return Mathf.RoundToInt(currentScore / scoreDivider);
+        }
+        
     }
 
     public void IncreaseTotalScore()
@@ -24,12 +53,22 @@ public class Score : MonoBehaviour
         {
             return;
         }
-        
+
         currentScore++;
     }
 
-    public int GetFinalScore(float timerRemainder)
+    public int GetFinalScore()
     {
-        return Mathf.RoundToInt(currentScore + timerRemainder);
+        return Mathf.RoundToInt(currentScore + fillFraction);
+    }
+
+    public float GetFillFractionValue()
+    {
+        return fillFraction;
+    }
+
+    public void CancelTimer()
+    {
+        timerValue = 0;
     }
 }

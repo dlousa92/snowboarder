@@ -10,11 +10,13 @@ public class FinishLine : MonoBehaviour
     [SerializeField] ParticleSystem finishEffect;
     [SerializeField] ParticleSystem finishEffect2;
     [SerializeField] ParticleSystem finishEffect3;
+    bool playerFinished = false;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            playerFinished = true;
             finishEffect.Play();
             finishEffect2.Play();
             finishEffect3.Play();
@@ -26,5 +28,10 @@ public class FinishLine : MonoBehaviour
     private void ResetLevel()
     {
         SceneManager.LoadScene(levelIndex);
+    }
+
+    public bool GetPlayerFinished()
+    {
+        return playerFinished;
     }
 }
