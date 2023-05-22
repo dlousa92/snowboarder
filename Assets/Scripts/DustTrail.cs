@@ -7,6 +7,7 @@ public class DustTrail : MonoBehaviour
 {
     [SerializeField] ParticleSystem snowEffect;
     [SerializeField] AudioClip snowboardSFX;
+    bool isTouchingSurface;
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -14,6 +15,7 @@ public class DustTrail : MonoBehaviour
         {
            snowEffect.Play();
            GetComponent<AudioSource>().Play();
+           SetIsTouchingSurface(true);
         }
         
     }
@@ -22,5 +24,16 @@ public class DustTrail : MonoBehaviour
     {
         snowEffect.Stop();
         GetComponent<AudioSource>().Stop();
+        SetIsTouchingSurface(false);
+    }
+
+    public void SetIsTouchingSurface(bool touchingSurface)
+    {
+        isTouchingSurface = touchingSurface;
+    }
+
+    public bool GetIsTouchingSurface()
+    {
+        return isTouchingSurface;
     }
 }

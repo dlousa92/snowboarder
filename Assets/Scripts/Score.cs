@@ -6,6 +6,12 @@ public class Score : MonoBehaviour
 {
     int currentScore;
     [SerializeField] float scoreDivider = 10;
+    DustTrail dustTrail;
+
+    private void Start() 
+    {
+        dustTrail = FindObjectOfType<DustTrail>();
+    }
 
     public int GetCurrentScore()
     {
@@ -14,6 +20,11 @@ public class Score : MonoBehaviour
 
     public void IncreaseTotalScore()
     {
+        if (dustTrail.GetIsTouchingSurface())
+        {
+            return;
+        }
+        
         currentScore++;
     }
 
