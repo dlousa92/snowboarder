@@ -6776,6 +6776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   scoreDivider: 10
+  timerMultiplier: 100
   timeToCompleteLevel: 60
 --- !u!1 &515801887
 GameObject:
@@ -19966,7 +19967,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870780667}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 40, y: -9.9, z: 0}
+  m_LocalPosition: {x: 779.4, y: -119.1, z: 0}
   m_LocalScale: {x: 1.3047037, y: 1.5127, z: 1.5127}
   m_ConstrainProportionsScale: 0
   m_Children:
